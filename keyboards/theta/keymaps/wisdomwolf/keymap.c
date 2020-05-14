@@ -43,14 +43,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC,   KC_AMPR,     KC_ASTR,     KC_LPRN,  KC_RPRN, KC_BSPC, \
   KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_LEFT,   KC_DOWN,     KC_UP,       KC_RIGHT, KC_PIPE, KC_PIPE, \
   BL_STEP, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,    S(KC_NUHS),  S(KC_NUBS),  _______,  _______, _______, \
-  XXXXXXX, NUMPAD, _______, _______, _______, _______, _______,   ADJUST,      KC_VOLD,     KC_VOLU,  KC_MPLY, XXXXXXX \
+  XXXXXXX, NUMPAD, _______, _______, _______, _______, _______,    ADJUST,      KC_VOLD,     KC_VOLU,  KC_MPLY, XXXXXXX \
 ),
 
 [_RAISE] = LAYOUT_ortho_4x12( \
   KC_GRV,     KC_1,     KC_2,      KC_3,     KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
   KC_TAB,     KC_MS_L,  KC_MS_U,   KC_MS_R,  KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
   _______,    KC_MS_L,  KC_MS_D,   KC_MS_R,  KC_BTN1, KC_BTN2, KC_F12,  KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, _______, \
-  XXXXXXX,    _______,  _______,   _______,  ADJUST,  KC_BTN2, _______, _______, _______, KC_LPRN, KC_RPRN, XXXXXXX \
+  XXXXXXX,    NUMPAD,  _______,   _______,   ADJUST,  KC_BTN2, _______, _______, _______, KC_LPRN, KC_RPRN, XXXXXXX \
 ),
 
 
@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,     KC_1,     KC_2,      KC_3,     KC_4,    KC_5,    KC_6,    KC_KP_7,    KC_KP_8,    KC_KP_9,    KC_KP_ASTERISK,  KC_BSPC, \
   KC_TAB,     KC_MS_L,  KC_MS_U,   KC_MS_R,  KC_F4,   KC_F5,   KC_F6,   KC_KP_4,    KC_KP_5,    KC_KP_6,    KC_KP_MINUS,     KC_KP_SLASH, \
   _______,    KC_MS_L,  KC_MS_D,   KC_MS_R,  KC_BTN1, KC_BTN2, KC_F12,  KC_KP_1,    KC_KP_2,    KC_KP_3,    KC_KP_PLUS,      KC_EQUAL, \
-  XXXXXXX,    _______,  _______,   _______,  ADJUST,  KC_BTN2, KC_NO,   KC_KP_0,    KC_KP_0,    KC_KP_DOT,  KC_KP_ENTER,     XXXXXXX \
+  XXXXXXX,    _______,  _______,   _______,  KC_NO,   KC_BTN2, KC_NO,   KC_KP_0,    KC_KP_0,    KC_KP_DOT,  KC_KP_ENTER,     XXXXXXX \
 )
 
 };
@@ -97,6 +97,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+
+    case NUMPAD:
+     if (record->event.pressed) {
+       layer_on(_NUMPAD);
+     } else {
+       layer_off(_NUMPAD);
+     }
+     return false;
+     break;
 
   }
   return true;
